@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none" stroke="currentColor">
+  <path d="M50 10 L80 30 L80 70 L50 90 L20 70 L20 30 Z" stroke-width="4"/>
+  <text x="50" y="60" text-anchor="middle" font-family="Arial" font-size="40" fill="currentColor">CV</text>
+  <path d="M35 75 L65 75" stroke-width="4"/>
+  <path d="M45 65 L55 65" stroke-width="4"/>
+</svg>
