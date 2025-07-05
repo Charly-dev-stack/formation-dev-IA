@@ -1,13 +1,380 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React + TS</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Formation IA Gratuite – Lance ta carrière de dev !</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <!-- Feather Icons (SVG) -->
+  <script src="https://unpkg.com/feather-icons"></script>
+  <style>
+    :root {
+      --primary: #6366f1;
+      --secondary: #a78bfa;
+      --dark-bg: #18181b;
+      --section-bg: #23233a;
+      --text-main: #fff;
+      --text-muted: #c7d2fe;
+      --shadow: 0 6px 30px #0003;
+    }
+    html { scroll-behavior: smooth;}
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, var(--dark-bg) 0%, #312e81 100%);
+      color: var(--text-main);
+    }
+    header {
+      min-height: 70vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 1rem 2rem 1rem;
+      background-image: url('https://images.unsplash.com/photo-1503676382389-4809596d5290?auto=format&fit=crop&w=1200&q=80');
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+    header::before {
+      content:'';
+      position:absolute;
+      inset:0;
+      background:rgba(24,24,27,0.82);
+      z-index:1;
+    }
+    .header-content {
+      position: relative;
+      z-index:2;
+      text-align:center;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+    .avatar {
+      width: 110px;
+      height: 110px;
+      border-radius: 100px;
+      border: 4px solid var(--primary);
+      margin-bottom: 1rem;
+      object-fit: cover;
+      box-shadow: var(--shadow);
+      background: #fff3;
+    }
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.7rem;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .subtitle {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+    }
+    .cta-btn {
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      color: #fff;
+      padding: 1rem 2.5rem;
+      border: none;
+      border-radius: 32px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-top: 1rem;
+      transition: background 0.2s, transform 0.2s;
+      box-shadow: var(--shadow);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+    .cta-btn:hover { background: linear-gradient(90deg,#4338ca,#a21caf);transform: scale(1.04);}
+    .section {
+      background: var(--section-bg);
+      margin: 2.5rem auto;
+      border-radius: 1.3rem;
+      box-shadow: var(--shadow);
+      padding: 2.5rem 1.5rem;
+      max-width: 850px;
+    }
+    .section-title {
+      font-size: 2rem;
+      color: var(--primary);
+      margin-bottom: 1.2rem;
+      text-align: center;
+      letter-spacing: .01em;
+      font-weight: 700;
+    }
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+    .feature {
+      background: #27274a;
+      border-radius: 1rem;
+      padding: 1.5rem 1rem;
+      width: 180px;
+      text-align: center;
+      box-shadow: 0 4px 16px #0002;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .feature svg { color: var(--primary); margin-bottom: .3rem;}
+    .feature-title {
+      font-weight: 600;
+      margin-bottom: .2rem;
+      color: var(--secondary);
+      font-size: 1.08rem;
+    }
+    .feature-desc { color: #cbd5e1; font-size: 0.98rem;}
+    .program-list {
+      margin: 2rem 0 0 0;
+      padding-left: 0;
+      list-style: none;
+      gap: 1.2rem;
+      display: flex;
+      flex-direction: column;
+    }
+    .program-list li {
+      background: #18181b;
+      margin-bottom: 1rem;
+      border-radius: 0.7rem;
+      padding: 1rem 1.2rem;
+      color: #dbeafe;
+      box-shadow: 0 1px 8px #0001;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .program-list svg { color: var(--secondary);}
+    form {
+      background: #18181bcc;
+      border-radius: 1rem;
+      box-shadow: var(--shadow);
+      padding: 2.2rem 1.2rem 1.2rem 1.2rem;
+      margin: 2.5rem auto 0 auto;
+      max-width: 420px;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+    label {
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: .2rem;
+    }
+    input, textarea {
+      border: none;
+      border-radius: 0.6rem;
+      padding: 0.8rem;
+      font-size: 1rem;
+      font-family: inherit;
+      margin-bottom: 0.2rem;
+      color: #18181b;
+      width: 100%;
+      box-sizing: border-box;
+      background: #f1f5f9;
+      transition: box-shadow 0.18s;
+    }
+    input:focus, textarea:focus { outline: 2px solid var(--primary);}
+    textarea { min-height: 90px; resize: vertical;}
+    button[type="submit"] {
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      color: #fff;
+      padding: 0.9rem;
+      border: none;
+      border-radius: 0.7rem;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.18s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 0.3rem;
+    }
+    button[type="submit"]:hover { background: linear-gradient(90deg,#4338ca,#a21caf);transform: scale(1.04);}
+    .success, .error {
+      text-align: center;
+      margin-top: .6rem;
+      font-weight: bold;
+      padding: 0.8rem;
+      border-radius: 0.5rem;
+      font-size: 1.08rem;
+      box-shadow: 0 2px 10px #0002;
+    }
+    .success { background: #10b98122; color: #10b981;}
+    .error { background: #be123c22; color: #be123c;}
+    .faq {
+      margin: 2rem 0 0 0;
+      max-width: 650px;
+      margin-left: auto; margin-right: auto;
+    }
+    .faq-item {margin-bottom:1.1rem;}
+    .faq-q {font-weight:700;color:var(--primary);}
+    .faq-a {color: #cbd5e1;}
+    footer {
+      margin: 3rem 0 1.2rem 0;
+      text-align: center;
+      color: #64748b;
+      font-size: 1rem;
+    }
+    @media (max-width: 900px) {
+      .features { flex-direction: column; align-items: center;}
+      .feature { width: 95%;}
+      .section { padding: 1.5rem 0.5rem;}
+    }
+    @media (max-width: 600px) {
+      header {min-height: 55vh;}
+      h1 {font-size: 2rem;}
+      .section-title {font-size: 1.4rem;}
+      .program-list li {font-size:0.97rem;}
+      .faq {font-size:0.97rem;}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <img class="avatar" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Formateur IA" />
+      <h1>Formation IA Gratuite</h1>
+      <div class="subtitle">
+        <span>Lance ta carrière de développeur web <b>boosté par l’IA</b><br>
+        <b>Première édition 100% gratuite</b> – Postule dès maintenant !</span>
+      </div>
+      <a href="#inscription" class="cta-btn">
+        <span data-feather="arrow-down-circle"></span> Je m’inscris gratuitement
+      </a>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="section-title">Ce que tu vas vivre</div>
+    <div class="features">
+      <div class="feature">
+        <span data-feather="cpu"></span>
+        <div class="feature-title">IA & Code</div>
+        <div class="feature-desc">Initie-toi à l’IA appliquée au dev, maîtrise les outils modernes (ChatGPT, Copilot...)</div>
+      </div>
+      <div class="feature">
+        <span data-feather="code"></span>
+        <div class="feature-title">Web Moderne</div>
+        <div class="feature-desc">Apprends HTML, CSS, JavaScript, React et construis des projets concrets</div>
+      </div>
+      <div class="feature">
+        <span data-feather="activity"></span>
+        <div class="feature-title">Projets Réels</div>
+        <div class="feature-desc">Crée un portfolio, collabore, résous de vrais challenges pratiques</div>
+      </div>
+      <div class="feature">
+        <span data-feather="users"></span>
+        <div class="feature-title">Ambiance & entraide</div>
+        <div class="feature-desc">Discord privé, coaching humain, entraide et bienveillance</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-title">Programme rapide</div>
+    <ul class="program-list">
+      <li><span data-feather="globe"></span> <b>Développement web</b> : HTML5, CSS3, JS moderne, bonnes pratiques</li>
+      <li><span data-feather="cpu"></span> <b>IA pour le dev</b> : prompt engineering, Copilot, automatisation</li>
+      <li><span data-feather="layers"></span> <b>React & outils</b> : frameworks modernes, code collaboratif</li>
+      <li><span data-feather="cloud"></span> <b>Déploiement</b> : hébergement cloud, portfolio en ligne</li>
+      <li><span data-feather="star"></span> <b>Accompagnement</b> : coaching, Q&A, communauté privée</li>
+    </ul>
+  </section>
+
+  <section class="section" id="inscription">
+    <div class="section-title">Inscription gratuite</div>
+    <form id="form">
+      <div>
+        <label for="name">Nom complet</label>
+        <input type="text" id="name" name="name" required autocomplete="name" />
+      </div>
+      <div>
+        <label for="email">Adresse email</label>
+        <input type="email" id="email" name="email" required autocomplete="email" />
+      </div>
+      <div>
+        <label for="message">Pourquoi cette formation ?</label>
+        <textarea id="message" name="message" rows="3" placeholder="Dis-moi en 2 phrases ce qui te motive…"></textarea>
+      </div>
+      <button type="submit">
+        <span data-feather="send"></span>
+        Je m’inscris
+      </button>
+      <div id="result"></div>
+    </form>
+  </section>
+
+  <section class="section faq">
+    <div class="section-title">FAQ</div>
+    <div class="faq-item">
+      <div class="faq-q">C’est vraiment gratuit ?</div>
+      <div class="faq-a">Oui ! C’est la première édition, ton retour m’aidera à améliorer la formation.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Y a-t-il un niveau requis ?</div>
+      <div class="faq-a">Non. Débutant.e.s et curieux.ses bienvenu.e.s !</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Comment se passent les cours ?</div>
+      <div class="faq-a">À distance, en petits groupes, via Discord et visio. Beaucoup de pratique !</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Combien de temps ça prend ?</div>
+      <div class="faq-a">6 semaines, 2 sessions live par semaine + projets à ton rythme.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Mes infos sont-elles en sécurité ?</div>
+      <div class="faq-a">Oui, elles ne seront jamais partagées ni revendues.</div>
+    </div>
+  </section>
+
+  <footer>
+    © 2025 Formation IA gratuite par Charly-dev-stack – Un projet passion
+  </footer>
+
+  <!-- Feather icons loader -->
+  <script>
+    feather.replace();
+  </script>
+  <!-- EmailJS integration -->
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script>
+    // Remplace ces valeurs par celles de ton compte EmailJS
+    const EMAILJS_USER_ID = 'BAerqtunWsmxD_aY_';
+    const EMAILJS_SERVICE_ID = 'service_wdomi3o';
+    const EMAILJS_TEMPLATE_ID = 'template_rtpxgum';
+
+    (function(){
+      emailjs.init(EMAILJS_USER_ID);
+    })();
+
+    const form = document.getElementById('form');
+    const result = document.getElementById('result');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      result.textContent = "";
+      emailjs.sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, this)
+        .then(() => {
+          result.textContent = "✅ Inscription envoyée ! Tu recevras un email de confirmation.";
+          result.className = "success";
+          form.reset();
+        }, (error) => {
+          result.textContent = "❌ Une erreur est survenue. Merci de réessayer.";
+          result.className = "error";
+        });
+    });
+  </script>
+</body>
 </html>
